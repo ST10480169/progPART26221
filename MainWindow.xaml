@@ -1,0 +1,395 @@
+<Window x:Class="GraceAI.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="GRACE AI — Cybersecurity Awareness Bot"
+        Height="820" Width="1280"
+        MinHeight="640" MinWidth="960"
+        WindowStartupLocation="CenterScreen"
+        Background="{StaticResource DeepNavyBrush}"
+        FontFamily="Segoe UI">
+
+    <Window.Resources>
+        <DropShadowEffect x:Key="CyanGlowEffect" Color="#00D4FF" BlurRadius="20" ShadowDepth="0" Opacity="0.7"/>
+        <DropShadowEffect x:Key="SubtleGlow" Color="#00D4FF" BlurRadius="8" ShadowDepth="0" Opacity="0.3"/>
+    </Window.Resources>
+
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+
+        <Border Grid.Row="0" Background="#060C18" Padding="20,14">
+            <Border.BorderBrush>
+                <LinearGradientBrush StartPoint="0,1" EndPoint="1,1">
+                    <GradientStop Color="#00D4FF" Offset="0"/>
+                    <GradientStop Color="#004466" Offset="0.5"/>
+                    <GradientStop Color="#00D4FF" Offset="1"/>
+                </LinearGradientBrush>
+            </Border.BorderBrush>
+            <Border.BorderThickness>0,0,0,1</Border.BorderThickness>
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto"/>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="Auto"/>
+                </Grid.ColumnDefinitions>
+
+                <Viewbox Grid.Column="0" Width="52" Height="52" Margin="0,0,16,0">
+                    <Canvas Width="100" Height="100">
+                        <Path Fill="#00D4FF" Opacity="0.15"
+                              Data="M 50,5 L 95,25 L 95,55 Q 95,85 50,98 Q 5,85 5,55 L 5,25 Z"/>
+                        <Path Stroke="#00D4FF" StrokeThickness="3" Fill="Transparent"
+                              Data="M 50,8 L 92,27 L 92,55 Q 92,83 50,95 Q 8,83 8,55 L 8,27 Z"/>
+                        <Rectangle Fill="#00D4FF" Width="28" Height="22" Canvas.Left="36" Canvas.Top="52" RadiusX="4" RadiusY="4"/>
+                        <Path Stroke="#00D4FF" StrokeThickness="5" Fill="Transparent" StrokeStartLineCap="Round" StrokeEndLineCap="Round"
+                              Data="M 40,52 L 40,42 Q 40,30 50,30 Q 60,30 60,42 L 60,52"/>
+                        <Ellipse Fill="#060C18" Width="8" Height="8" Canvas.Left="46" Canvas.Top="57"/>
+                        <Rectangle Fill="#060C18" Width="5" Height="7" Canvas.Left="47.5" Canvas.Top="63" RadiusX="1" RadiusY="1"/>
+                    </Canvas>
+                </Viewbox>
+
+                <StackPanel Grid.Column="1" VerticalAlignment="Center">
+                    <StackPanel Orientation="Horizontal">
+                        <TextBlock Text="GRACE" FontSize="28" FontFamily="Segoe UI Black"
+                                   Foreground="{StaticResource CyanAccentBrush}"
+                                   Effect="{StaticResource CyanGlowEffect}"/>
+                        <TextBlock Text=" AI" FontSize="28" FontFamily="Segoe UI Black"
+                                   Foreground="White"/>
+                        <Border Background="#00D4FF" CornerRadius="4" Padding="8,2" Margin="12,6,0,6" VerticalAlignment="Center">
+                            <TextBlock Text="v2.0" FontSize="11" FontFamily="Consolas" Foreground="#060C18" FontWeight="Bold"/>
+                        </Border>
+                    </StackPanel>
+                    <TextBlock Text="Cybersecurity Awareness Bot  •  Powered by Intelligent Keyword Recognition"
+                               FontSize="12" Foreground="{StaticResource GrayTextBrush}" Margin="2,2,0,0"/>
+                </StackPanel>
+
+                <StackPanel Grid.Column="2" VerticalAlignment="Center" HorizontalAlignment="Right">
+                    <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
+                        <Ellipse x:Name="StatusDot" Width="10" Height="10" Fill="{StaticResource SuccessGreenBrush}" Margin="0,0,6,0">
+                            <Ellipse.Effect>
+                                <DropShadowEffect Color="#00FF88" BlurRadius="8" ShadowDepth="0" Opacity="0.8"/>
+                            </Ellipse.Effect>
+                        </Ellipse>
+                        <TextBlock Text="ONLINE" FontSize="12" FontFamily="Consolas"
+                                   Foreground="{StaticResource SuccessGreenBrush}" FontWeight="Bold"/>
+                    </StackPanel>
+                    <TextBlock x:Name="UserStatusLabel" Text="Guest Session"
+                               FontSize="11" Foreground="{StaticResource GrayTextBrush}"
+                               HorizontalAlignment="Right" Margin="0,3,0,0"/>
+                    <TextBlock x:Name="ClockLabel" Text=""
+                               FontSize="11" FontFamily="Consolas"
+                               Foreground="{StaticResource GrayTextBrush}"
+                               HorizontalAlignment="Right"/>
+                </StackPanel>
+            </Grid>
+        </Border>
+
+        <Grid Grid.Row="1">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="260"/>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="240"/>
+            </Grid.ColumnDefinitions>
+
+            <Border Grid.Column="0" Background="#080F1E" Padding="16">
+                <Border.BorderBrush>
+                    <SolidColorBrush Color="#1A3050"/>
+                </Border.BorderBrush>
+                <Border.BorderThickness>0,0,1,0</Border.BorderThickness>
+                <ScrollViewer VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Disabled">
+                    <StackPanel>
+
+                        <TextBlock Text="◆  TOPICS" FontSize="11" FontFamily="Consolas"
+                                   Foreground="{StaticResource CyanAccentBrush}"
+                                   FontWeight="Bold" Margin="0,0,0,12"/>
+
+                        <Button x:Name="BtnPhishing" Content="🎣  Phishing" Style="{StaticResource GhostButton}"
+                                HorizontalAlignment="Stretch" HorizontalContentAlignment="Left"
+                                Margin="0,3" Click="TopicButton_Click" Tag="phishing"/>
+                        <Button x:Name="BtnPassword" Content="🔑  Password Safety" Style="{StaticResource GhostButton}"
+                                HorizontalAlignment="Stretch" HorizontalContentAlignment="Left"
+                                Margin="0,3" Click="TopicButton_Click" Tag="password safety"/>
+                        <Button x:Name="Btn2FA" Content="🛡  Two-Factor Auth" Style="{StaticResource GhostButton}"
+                                HorizontalAlignment="Stretch" HorizontalContentAlignment="Left"
+                                Margin="0,3" Click="TopicButton_Click" Tag="two-factor authentication"/>
+                        <Button x:Name="BtnRansomware" Content="💀  Ransomware" Style="{StaticResource GhostButton}"
+                                HorizontalAlignment="Stretch" HorizontalContentAlignment="Left"
+                                Margin="0,3" Click="TopicButton_Click" Tag="ransomware"/>
+                        <Button x:Name="BtnSocial" Content="🎭  Social Engineering" Style="{StaticResource GhostButton}"
+                                HorizontalAlignment="Stretch" HorizontalContentAlignment="Left"
+                                Margin="0,3" Click="TopicButton_Click" Tag="social engineering"/>
+                        <Button x:Name="BtnBrowsing" Content="🌐  Safe Browsing" Style="{StaticResource GhostButton}"
+                                HorizontalAlignment="Stretch" HorizontalContentAlignment="Left"
+                                Margin="0,3" Click="TopicButton_Click" Tag="safe browsing"/>
+                        <Button x:Name="BtnMalware" Content="🦠  Malware" Style="{StaticResource GhostButton}"
+                                HorizontalAlignment="Stretch" HorizontalContentAlignment="Left"
+                                Margin="0,3" Click="TopicButton_Click" Tag="malware"/>
+                        <Button x:Name="BtnHygiene" Content="🧹  Cyber Hygiene" Style="{StaticResource GhostButton}"
+                                HorizontalAlignment="Stretch" HorizontalContentAlignment="Left"
+                                Margin="0,3" Click="TopicButton_Click" Tag="cyber hygiene"/>
+                        <Button x:Name="BtnScams" Content="⚠  Scams" Style="{StaticResource GhostButton}"
+                                HorizontalAlignment="Stretch" HorizontalContentAlignment="Left"
+                                Margin="0,3" Click="TopicButton_Click" Tag="scams"/>
+                        <Button x:Name="BtnPrivacy" Content="🔒  Privacy Protection" Style="{StaticResource GhostButton}"
+                                HorizontalAlignment="Stretch" HorizontalContentAlignment="Left"
+                                Margin="0,3" Click="TopicButton_Click" Tag="privacy"/>
+
+                        <Border Height="1" Background="#1A3050" Margin="0,16"/>
+
+                        <TextBlock Text="◆  QUICK ACTIONS" FontSize="11" FontFamily="Consolas"
+                                   Foreground="{StaticResource CyanAccentBrush}"
+                                   FontWeight="Bold" Margin="0,0,0,12"/>
+
+                        <Button Content="📋  Clear Chat" Style="{StaticResource GhostButton}"
+                                HorizontalAlignment="Stretch" HorizontalContentAlignment="Left"
+                                Margin="0,3" Click="BtnClear_Click"/>
+                        <Button Content="🔁  Restart Session" Style="{StaticResource GhostButton}"
+                                HorizontalAlignment="Stretch" HorizontalContentAlignment="Left"
+                                Margin="0,3" Click="BtnRestart_Click"/>
+
+                        <Border Margin="0,20,0,0" Padding="10" CornerRadius="8"
+                                Background="#0A1525">
+                            <Border.BorderBrush>
+                                <SolidColorBrush Color="#1A3050"/>
+                            </Border.BorderBrush>
+                            <Border.BorderThickness>1</Border.BorderThickness>
+                            <TextBlock FontFamily="Consolas" FontSize="8.5" Foreground="#1A4A6A"
+                                       TextWrapping="Wrap" LineHeight="13">
+                                <![CDATA[  .-'`   `'-.
+ _,.'.=== ===.'.,_
+/ /  .___.___. \ \
+: /|  (o) (o)  |\ ;
+|`\_,.-'` `"-.,_/'|
+|  \           /  |
+|   \   __    /   |
+|    \ (__) _ /   |
+|     '-...-'     |
+|      '---'      |]]>
+                            </TextBlock>
+                        </Border>
+
+                    </StackPanel>
+                </ScrollViewer>
+            </Border>
+
+            <Grid Grid.Column="1">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="Auto"/>
+                </Grid.RowDefinitions>
+
+                <ScrollViewer x:Name="ChatScrollViewer" Grid.Row="0"
+                              VerticalScrollBarVisibility="Auto"
+                              HorizontalScrollBarVisibility="Disabled"
+                              Background="#0A0E1A"
+                              Padding="20,16">
+                    <StackPanel x:Name="ChatPanel" VerticalAlignment="Bottom">
+                        <Border Background="#0D1A30" CornerRadius="12" Padding="20,16" Margin="0,0,0,12">
+                            <Border.BorderBrush>
+                                <LinearGradientBrush StartPoint="0,0" EndPoint="1,0">
+                                    <GradientStop Color="#00D4FF" Offset="0"/>
+                                    <GradientStop Color="#004466" Offset="1"/>
+                                </LinearGradientBrush>
+                            </Border.BorderBrush>
+                            <Border.BorderThickness>1,1,1,1</Border.BorderThickness>
+                            <StackPanel>
+                                <TextBlock Text="🛡  Welcome to GRACE AI" FontSize="16"
+                                           Foreground="{StaticResource CyanAccentBrush}"
+                                           FontWeight="Bold" FontFamily="Segoe UI Semibold"/>
+                                <TextBlock Text="Your Cybersecurity Awareness Bot is ready. Type your name to begin, or click any topic on the left panel."
+                                           FontSize="13" Foreground="{StaticResource SoftWhiteBrush}"
+                                           Margin="0,8,0,0" TextWrapping="Wrap" LineHeight="20"/>
+                                <TextBlock Text="Type 'help' for commands  •  Type 'exit' to close  •  Voice greeting enabled"
+                                           FontSize="11" Foreground="{StaticResource GrayTextBrush}"
+                                           Margin="0,8,0,0" FontFamily="Consolas"/>
+                            </StackPanel>
+                        </Border>
+                    </StackPanel>
+                </ScrollViewer>
+
+                <Border Grid.Row="1" Background="#060C18" Padding="16,12">
+                    <Border.BorderBrush>
+                        <SolidColorBrush Color="#1A3050"/>
+                    </Border.BorderBrush>
+                    <Border.BorderThickness>0,1,0,0</Border.BorderThickness>
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="Auto"/>
+                            <ColumnDefinition Width="Auto"/>
+                        </Grid.ColumnDefinitions>
+
+                        <TextBox x:Name="InputBox" Grid.Column="0"
+                                 Style="{StaticResource ChatInput}"
+                                 VerticalAlignment="Center"
+                                 KeyDown="InputBox_KeyDown"
+                                 TextChanged="InputBox_TextChanged"
+                                 ToolTip="Type your message and press Enter or click Send"/>
+
+                        <TextBlock x:Name="InputPlaceholder" Grid.Column="0"
+                                   Text="Type a message or keyword..." IsHitTestVisible="False"
+                                   Foreground="#3A5A7A" FontSize="14" FontFamily="Segoe UI"
+                                   VerticalAlignment="Center" Margin="16,0,0,0"/>
+
+                        <Button x:Name="BtnSend" Grid.Column="1" Content="SEND  ▶"
+                                Style="{StaticResource CyanButton}"
+                                Width="100" Margin="10,0,6,0"
+                                Click="BtnSend_Click"
+                                IsDefault="True"/>
+
+                        <Button x:Name="BtnExit" Grid.Column="2" Content="✕  EXIT"
+                                Style="{StaticResource DangerButton}"
+                                Width="90"
+                                Click="BtnExit_Click"/>
+                    </Grid>
+                </Border>
+            </Grid>
+
+            <Border Grid.Column="2" Background="#080F1E" Padding="16">
+                <Border.BorderBrush>
+                    <SolidColorBrush Color="#1A3050"/>
+                </Border.BorderBrush>
+                <Border.BorderThickness>1,0,0,0</Border.BorderThickness>
+                <StackPanel>
+
+                    <Border Background="#0D1A2E" CornerRadius="10" Padding="14" Margin="0,0,0,14">
+                        <Border.BorderBrush>
+                            <SolidColorBrush Color="#1A3050"/>
+                        </Border.BorderBrush>
+                        <Border.BorderThickness>1</Border.BorderThickness>
+                        <StackPanel>
+                            <TextBlock Text="◆  SESSION MEMORY" FontSize="11" FontFamily="Consolas"
+                                       Foreground="{StaticResource CyanAccentBrush}"
+                                       FontWeight="Bold" Margin="0,0,0,10"/>
+                            <StackPanel Orientation="Horizontal" Margin="0,4">
+                                <TextBlock Text="User:" FontSize="12" Foreground="{StaticResource GrayTextBrush}" Width="70"/>
+                                <TextBlock x:Name="MemUserName" Text="—" FontSize="12"
+                                           Foreground="White" FontFamily="Consolas"/>
+                            </StackPanel>
+                            <StackPanel Orientation="Horizontal" Margin="0,4">
+                                <TextBlock Text="Mood:" FontSize="12" Foreground="{StaticResource GrayTextBrush}" Width="70"/>
+                                <TextBlock x:Name="MemMood" Text="—" FontSize="12"
+                                           Foreground="White" FontFamily="Consolas"/>
+                            </StackPanel>
+                            <StackPanel Orientation="Horizontal" Margin="0,4">
+                                <TextBlock Text="Interest:" FontSize="12" Foreground="{StaticResource GrayTextBrush}" Width="70"/>
+                                <TextBlock x:Name="MemTopic" Text="—" FontSize="12"
+                                           Foreground="{StaticResource CyanAccentBrush}" FontFamily="Consolas"
+                                           TextWrapping="Wrap"/>
+                            </StackPanel>
+                            <StackPanel Orientation="Horizontal" Margin="0,4">
+                                <TextBlock Text="Messages:" FontSize="12" Foreground="{StaticResource GrayTextBrush}" Width="70"/>
+                                <TextBlock x:Name="MemMessages" Text="0" FontSize="12"
+                                           Foreground="White" FontFamily="Consolas"/>
+                            </StackPanel>
+                        </StackPanel>
+                    </Border>
+
+                    <Border Background="#0D1A2E" CornerRadius="10" Padding="14" Margin="0,0,0,14">
+                        <Border.BorderBrush>
+                            <SolidColorBrush Color="#1A3050"/>
+                        </Border.BorderBrush>
+                        <Border.BorderThickness>1</Border.BorderThickness>
+                        <StackPanel>
+                            <TextBlock Text="◆  SECURITY TIP" FontSize="11" FontFamily="Consolas"
+                                       Foreground="{StaticResource WarnYellowBrush}"
+                                       FontWeight="Bold" Margin="0,0,0,10"/>
+                            <TextBlock x:Name="SecurityTipLabel"
+                                       Text="Use a password manager to generate and store unique, strong passwords for every account."
+                                       FontSize="12" Foreground="{StaticResource SoftWhiteBrush}"
+                                       TextWrapping="Wrap" LineHeight="18"/>
+                        </StackPanel>
+                    </Border>
+
+                    <Border Background="#0D1A2E" CornerRadius="10" Padding="14" Margin="0,0,0,14">
+                        <Border.BorderBrush>
+                            <SolidColorBrush Color="#1A3050"/>
+                        </Border.BorderBrush>
+                        <Border.BorderThickness>1</Border.BorderThickness>
+                        <StackPanel>
+                            <TextBlock Text="◆  AWARENESS LEVEL" FontSize="11" FontFamily="Consolas"
+                                       Foreground="{StaticResource SuccessGreenBrush}"
+                                       FontWeight="Bold" Margin="0,0,0,10"/>
+                            <ProgressBar x:Name="AwarenessBar" Value="0" Maximum="100"
+                                         Height="8" Background="#1A3050" Margin="0,0,0,6">
+                                <ProgressBar.Foreground>
+                                    <LinearGradientBrush StartPoint="0,0" EndPoint="1,0">
+                                        <GradientStop Color="#00D4FF" Offset="0"/>
+                                        <GradientStop Color="#00FF88" Offset="1"/>
+                                    </LinearGradientBrush>
+                                </ProgressBar.Foreground>
+                                <ProgressBar.Template>
+                                    <ControlTemplate TargetType="ProgressBar">
+                                        <Border Background="{TemplateBinding Background}" CornerRadius="4">
+                                            <Border x:Name="PART_Track" CornerRadius="4">
+                                                <Border x:Name="PART_Indicator"
+                                                        Background="{TemplateBinding Foreground}"
+                                                        HorizontalAlignment="Left"
+                                                        CornerRadius="4"/>
+                                            </Border>
+                                        </Border>
+                                    </ControlTemplate>
+                                </ProgressBar.Template>
+                            </ProgressBar>
+                            <TextBlock x:Name="AwarenessLabel" Text="0% — Just getting started"
+                                       FontSize="11" FontFamily="Consolas"
+                                       Foreground="{StaticResource GrayTextBrush}"/>
+                        </StackPanel>
+                    </Border>
+
+                    <Border Background="#0D1A2E" CornerRadius="10" Padding="14">
+                        <Border.BorderBrush>
+                            <SolidColorBrush Color="#1A3050"/>
+                        </Border.BorderBrush>
+                        <Border.BorderThickness>1</Border.BorderThickness>
+                        <StackPanel>
+                            <TextBlock Text="◆  KEYWORDS DETECTED" FontSize="11" FontFamily="Consolas"
+                                       Foreground="{StaticResource GrayTextBrush}"
+                                       FontWeight="Bold" Margin="0,0,0,10"/>
+                            <ItemsControl x:Name="KeywordsList">
+                                <ItemsControl.ItemTemplate>
+                                    <DataTemplate>
+                                        <Border Background="#162840" CornerRadius="4" Padding="8,4" Margin="0,2">
+                                            <TextBlock Text="{Binding}" FontSize="11" FontFamily="Consolas"
+                                                       Foreground="{StaticResource CyanAccentBrush}"/>
+                                        </Border>
+                                    </DataTemplate>
+                                </ItemsControl.ItemTemplate>
+                            </ItemsControl>
+                            <TextBlock x:Name="NoKeywordsLabel" Text="None yet — start chatting!"
+                                       FontSize="11" Foreground="{StaticResource GrayTextBrush}"
+                                       FontFamily="Consolas"/>
+                        </StackPanel>
+                    </Border>
+
+                </StackPanel>
+            </Border>
+
+        </Grid>
+
+        <Border Grid.Row="2" Background="#04080F" Padding="16,6">
+            <Border.BorderBrush>
+                <SolidColorBrush Color="#0A1A30"/>
+            </Border.BorderBrush>
+            <Border.BorderThickness>0,1,0,0</Border.BorderThickness>
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="Auto"/>
+                </Grid.ColumnDefinitions>
+                <TextBlock x:Name="StatusLabel"
+                           Text="GRACE AI ready. Type your name to begin your cybersecurity session."
+                           FontSize="11" FontFamily="Consolas"
+                           Foreground="{StaticResource GrayTextBrush}"
+                           VerticalAlignment="Center"/>
+                <TextBlock Grid.Column="1"
+                           Text="GRACE AI  •  Cybersecurity Awareness Bot  •  Part 2 POE"
+                           FontSize="11" FontFamily="Consolas"
+                           Foreground="#1A3050" VerticalAlignment="Center"/>
+            </Grid>
+        </Border>
+
+    </Grid>
+</Window>
